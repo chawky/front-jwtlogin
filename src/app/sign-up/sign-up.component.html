@@ -3,14 +3,14 @@
       <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
       <div class="alert alert-success" *ngIf='loginSuccess'>{{successMessage}}</div>
       <!-- Tabs Titles -->
-      <h3>Login</h3>
+      <h3>Sign Up</h3>
   
       <!-- Login Form -->
       <form>
         <input type="text" id="username" class="fadeIn second" [(ngModel)]="username" name="username" placeholder="username">
         <input type="password" id="pw" class="fadeIn third" [(ngModel)]="pw" name="pw" placeholder="password">
-        <input type="submit" (click)=handleLogin() class="fadeIn fourth" value="Log In">
-        <input type="submit" (click)=handleRegistration() class="fadeIn fourth" value="SignUp">
+        <input type="text" id="email" class="fadeIn third" [(ngModel)]="email" name="email" placeholder="email">
+        <input type="submit" (click)=handleRegistration() class="fadeIn fourth" value="Register">
       </form>
   
     </div>
