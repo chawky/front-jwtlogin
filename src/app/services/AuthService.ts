@@ -23,13 +23,13 @@ export class AuthService {
   login(credentials: any ):Observable<any>{
     return this.http.post(environment.hostUrl + `/signin`,{
       username:credentials.username,
-      pw:credentials.pw
+      password:credentials.password
     },httOptions)
   }
   register(credentials: any ):Observable<any>{
     return this.http.post(environment.hostUrl + `/signup`,{
       username:credentials.username,
-      pw:credentials.pw,
+      password:credentials.password,
       email:credentials.email,
       role: credentials.role
     },httOptions)

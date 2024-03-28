@@ -9,7 +9,7 @@ import { AuthService } from '../services/AuthService';
 })
 export class SignUpComponent implements OnInit {
   username: string;
-  pw: string;
+  password: string;
   email: string;
   errorMessage = 'Invalid Credentials';
   role=[]
@@ -24,7 +24,7 @@ export class SignUpComponent implements OnInit {
   handleRegistration() {
     const credentials = {
       username:this.username,
-      pw:this.pw,
+      password:this.password,
       email:this.email,
       role: ["user"]
 
