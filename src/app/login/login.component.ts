@@ -6,59 +6,63 @@ import { TokenStorageService } from '../token-storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   username: string;
   password: string;
   errorMessage = 'Invalid Credentials';
   successMessage: string;
   invalidLogin = false;
   loginSuccess = false;
-  isLoggedIn=false
-  state:string
-  roles: string[]=[];
+  isLoggedIn = false;
+  state: string;
+  roles: string[] = [];
 
-  constructor(private authService: AuthService,private router:Router,private tokenStorage: TokenStorageService) {
-    if(this.router.getCurrentNavigation().extras.queryParams){
-      this.state= this.router.getCurrentNavigation().extras.queryParams.registrationState
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private tokenStorage: TokenStorageService
+  ) {
+    if (this.router.getCurrentNavigation().extras.queryParams) {
+      this.state =
+        this.router.getCurrentNavigation().extras.queryParams.registrationState;
       console.log(this.router.getCurrentNavigation());
       this.loginSuccess = true;
-     this.successMessage="you have been successfully registered you can now log in"
-    } 
-   if(tokenStorage.getToken()){
-    this.isLoggedIn=true;
-
-   }
+      this.successMessage =
+        'you have been successfully registered you can now log in';
+    }
+    if (tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  handleRegistration(){
+  handleRegistration() {
     this.router.navigate(['/signUp']);
   }
 
   handleLogin() {
     const credentials = {
-      username:this.username,
-      password:this.password
-    }
-    this.authService.login(credentials).subscribe((result) => {
-      this.invalidLogin = false;
-      this.loginSuccess = true;
-      this.successMessage = 'Login Successful';
-      this.tokenStorage.saveToken(result)
-      this.tokenStorage.saveUser(credentials)
-      this.isLoggedIn=true
-      // redirect to main page
-      this.router.navigate(['/welcomePage']);
-    }, () => {
-      this.invalidLogin = true;
-      this.loginSuccess = false;
-    });
+      username: this.username,
+      password: this.password,
+    };
+    this.authService.login(credentials).subscribe(
+      (result) => {
+        this.invalidLogin = false;
+        this.loginSuccess = true;
+        this.successMessage = 'Login Successful';
+        this.tokenStorage.saveToken(result);
+        this.tokenStorage.saveUser(credentials);
+        this.isLoggedIn = true;
+        // redirect to main page
+        this.router.navigate(['/welcomePage']);
+      },
+      () => {
+        this.invalidLogin = true;
+        this.loginSuccess = false;
+      }
+    );
   }
-
 }

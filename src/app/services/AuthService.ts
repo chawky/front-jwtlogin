@@ -4,45 +4,50 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from '../token-storage.service';
-const httOptions={
-  headers: new HttpHeaders({'Content-Type':'application/json'})
-}
+const httOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+};
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  
-    public username: string;
-    public password: string;
-    public isLoggedIn= false;
+  public username: string;
+  public password: string;
+  public isLoggedIn = false;
 
-  constructor(private http: HttpClient,private token:TokenStorageService) {
-
+  constructor(private http: HttpClient, private token: TokenStorageService) {}
+  login(credentials: any): Observable<any> {
+    return this.http.post(
+      environment.hostUrl + `/signin`,
+      {
+        username: credentials.username,
+        password: credentials.password,
+      },
+      httOptions
+    );
   }
-  login(credentials: any ):Observable<any>{
-    return this.http.post(environment.hostUrl + `/signin`,{
-      username:credentials.username,
-      password:credentials.password
-    },httOptions)
-  }
-  register(credentials: any ):Observable<any>{
-    return this.http.post(environment.hostUrl + `/signup`,{
-      username:credentials.username,
-      password:credentials.password,
-      email:credentials.email,
-      role: credentials.role
-    },httOptions)
+  register(credentials: any): Observable<any> {
+    return this.http.post(
+      environment.hostUrl + `/signup`,
+      {
+        username: credentials.username,
+        password: credentials.password,
+        email: credentials.email,
+        role: credentials.role,
+      },
+      httOptions
+    );
   }
 
   createBasicAuthToken(username: string, password: string) {
-    return 'Basic ' + window.btoa(username + ":" + password);
+    return 'Basic ' + window.btoa(username + ':' + password);
   }
 
-  registerSuccessfulLogin():boolean {
-    if(this.token.getToken()!=null){
-      this.isLoggedIn=true;
+  registerSuccessfulLogin(): boolean {
+    if (this.token.getToken() != null) {
+      this.isLoggedIn = true;
     }
-    return this.isLoggedIn
+    return this.isLoggedIn;
   }
 }
