@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "login-app"
+    }
+  },
+  "defaultProject": "login-app",
+  "cli": {
+    "analytics": false
+  }
 }

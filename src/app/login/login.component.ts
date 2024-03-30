@@ -9,7 +9,7 @@ import { TokenStorageService } from '../token-storage.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  username: string;
+  userName: string;
   password: string;
   errorMessage = 'Invalid Credentials';
   successMessage: string;
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
   handleLogin() {
     const credentials = {
-      username: this.username,
+      userName: this.userName,
       password: this.password,
     };
     this.authService.login(credentials).subscribe(

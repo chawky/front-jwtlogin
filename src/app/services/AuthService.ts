@@ -21,7 +21,7 @@ export class AuthService {
     return this.http.post(
       environment.hostUrl + `/signin`,
       {
-        username: credentials.username,
+        userName: credentials.userName,
         password: credentials.password,
       },
       httOptions
@@ -31,8 +31,10 @@ export class AuthService {
     return this.http.post(
       environment.hostUrl + `/signup`,
       {
-        username: credentials.username,
+        userName: credentials.userName,
         password: credentials.password,
+        firstName: credentials.firstName,
+        lastName: credentials.lastName,
         email: credentials.email,
         role: credentials.role,
       },

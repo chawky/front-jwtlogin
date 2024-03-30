@@ -8,11 +8,13 @@ import { AuthService } from '../services/AuthService';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-  username: string;
+  userName: string;
   password: string;
+  firstName: string;
+  lastName: string;
   email: string;
   errorMessage = 'Invalid Credentials';
-  role = [];
+  role = ["user"];
   successMessage: string;
   invalidLogin = false;
   loginSuccess = false;
@@ -22,8 +24,10 @@ export class SignUpComponent implements OnInit {
 
   handleRegistration() {
     const credentials = {
-      username: this.username,
+      userName: this.userName,
       password: this.password,
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: this.email,
       role: ['user'],
     };
